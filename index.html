@@ -24,28 +24,43 @@
 </head>
 <body>
     <div class="container-fluid">
-      <div class="row-fluid">
+      <div class="row-fluid"> <!-- Main content -->
 
-        <div class="span6"> <!-- Main content -->
-          <div class="well">
-            <h1>
-              Prashant Singh's Github Repositories.
-              <br/><small>By hashtag</small>
+        <div class="page-header">
+            <h1>Prashant Singh's Github Repositories
+              <small> <a href="https://github.com/prashtx">github.com/prashtx</a> </small>
             </h1>
-            <a class="btn" data-bind="click: refresh">Refresh</a>
-          </div>
         </div>
       </div>
+
       <div class="row-fluid">
-          <div class="span6 well" data-bind="foreach: tags">
-            <div class> <!-- tag -->
-              <h3>Tag: <span data-bind="text: name"></span></h3>
-              <h4>Count: <span data-bind="text: repos.length"></span></h4>
-              <ul data-bind="foreach: repos">
-                <li><a data-bind="attr: {href: html_url}, text: name"></a></li>
-              </ul>
-            </div> <!-- /tag -->
+        <div class="span5">
+          <h2>Repositories</h2>
+          <div class="" data-bind="foreach: repos">
+            <div class="span5"> <!-- repo -->
+              <h3><a data-bind="attr: {href: html_url}, text: name"></a></h3>
+              <div data-bind="text: description"></div>
+            </div> <!-- /repo -->
+          </div>
         </div>
+
+        <div class="span7 offset5">
+          <div class="well">
+            <p>
+              <h2>Hash Tags</h2>
+            </p>
+          <div class="row-fluid" data-bind="foreach: tags">
+            <div class="span3"> <!-- tag -->
+              <h3>#<span data-bind="text: name"></span> <small data-bind="text: repos.length"></small></h3>
+              <div class="row-fluid" data-bind="foreach: repos">
+                <div><a data-bind="attr: {href: html_url}, text: name"></a></div>
+              </div>
+            </div> <!-- /tag -->
+          </div>
+          </div>
+        </div>
+
+      <div class="row-fluid">
 
         </div> <!-- /Main content -->
 

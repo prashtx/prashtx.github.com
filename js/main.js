@@ -7,11 +7,18 @@ var PageVM = function() {
   // Hashtags
   self.tags = ko.observableArray();
 
-  // List of surveys
-  self.surveys = ko.observableArray();
+  // Repos
+  self.repos = ko.observableArray();
 
   self.refresh = function() {
-    //hashtub.getTagTable({org: 'codeforamerica'}, function(result) {
+    // Repos.
+    url = 'https://api.github.com/users/prashtx/repos';
+    $.ajax({url: url})
+    .done(function(result) {
+      self.repos(result);
+    });
+
+    // Hashtags.
     hashtub.getTagTable({user: 'prashtx'}, function(result) {
       var tags = [];
       var tag;
