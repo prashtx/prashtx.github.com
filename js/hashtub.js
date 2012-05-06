@@ -34,7 +34,7 @@ var hashtub = (function () {
     return tags;
   }
 
-  self.getTagTable = function(options, cb) {
+  self.getRepos = function(options, cb) {
     var url;
 
     if (options.org != undefined) {
@@ -50,29 +50,34 @@ var hashtub = (function () {
 
     $.ajax({url: url})
     .done(function (data) {
-      var tagTable = {};
-      var i;
-      var j;
-      var tags;
-      var repoList;
-      for (i = 0; i < data.length; i ++) {
-        tags = findTags(data[i].description);
-        for (j = 0; j < tags.length; j ++) {
-          repoList = tagTable[tags[j]];
-
-          // See if this tag is already in the table.
-          if (tagTable[tags[j]] === undefined) {
-            repoList = [];
-            tagTable[tags[j]] = repoList;
-          }
-
-          // Add the repo under this tag entry.
-          repoList.push(data[i]);
-        }
-      }
-
-      cb(tagTable);
+      cb(data);
     });
+  }
+
+  self.makeTagTable = function(repos) {
+    var tagTable = {};
+    var i;
+    var j;
+    var tags;
+    var repoList;
+
+    for (i = 0; i < repos.length; i ++) {
+      tags = findTags(repos[i].description);
+      for (j = 0; j < tags.length; j ++) {
+        repoList = tagTable[tags[j]];
+
+        // See if this tag is already in the table.
+        if (tagTable[tags[j]] === undefined) {
+          repoList = [];
+          tagTable[tags[j]] = repoList;
+        }
+
+        // Add the repo under this tag entry.
+        repoList.push(repos[i]);
+      }
+    }
+
+    return tagTable;
   }
 
   return self;
