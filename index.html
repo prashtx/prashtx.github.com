@@ -37,7 +37,10 @@
           <h2>Repositories</h2>
           <div class="" data-bind="foreach: repos">
             <p> <!-- repo -->
-              <h3><a data-bind="attr: {href: html_url}, text: name"></a></h3>
+            <h3><a data-bind="attr: {href: html_url}, text: name"></a></h3>
+              <div data-bind="if: fork_parent">
+                Forked from <a data-bind="attr: {href: fork_parent.html_url}, text: fork_parent.user + '/' + fork_parent.name"></a>
+              </div>
               <div data-bind="text: description"></div>
             </p> <!-- /repo -->
           </div>
