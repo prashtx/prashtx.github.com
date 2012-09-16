@@ -1,5 +1,6 @@
-/*jslint browser: true global document: true */
-var hashtub = (function () {
+/*jshint browser: true */
+/*global jQuery */
+var hashtub = (function ($) {
   "use strict";
   var self = {};
 
@@ -48,7 +49,10 @@ var hashtub = (function () {
       return;
     }
 
-    $.ajax({url: url})
+    $.ajax({
+      url: url,
+      dataType: 'json'
+    })
     .done(function (data) {
       cb(data);
     });
@@ -81,4 +85,4 @@ var hashtub = (function () {
   }
 
   return self;
-})();
+})(jQuery);
