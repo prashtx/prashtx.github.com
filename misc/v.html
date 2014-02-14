@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<style>
+body {
+  font-size: 500px;
+  font-family: Helvetica;
+  color: white;
+}
+#card {
+  width: 600px;
+  height: 600px;
+  margin: 50px auto;
+  background-color: black;
+  overflow: hidden;
+}
+#text {
+  top: 350px;
+  position: relative;
+}
+#colon {
+  display: inline-block;
+  position: relative;
+  opacity: 0;
+  top: -55px;
+}
+#x {
+  display: inline-block;
+}
+</style>
+</head>
+<body>
+<script>
+$(function () {
+  'use strict';
+
+  function sequence(arr) {
+    return arr.reduceRight(function (memo, f) {
+      return function () {
+        f(memo);
+      }
+    }, function () {});
+  }
+
+  var $text = $('#text');
+  var $colon = $('#colon');
+  var $x = $('#x');
+
+  function slideUp(next) {
+    $text.animate({
+      top: '50px'
+    }, {
+      duration: 2000,
+      easing: 'linear',
+      done: next
+    });
+  }
+
+  function slideDown(next) {
+    $text.animate({
+      top: '320px'
+    }, {
+      duration: 2000,
+      easing: 'linear',
+      done: next
+    });
+  }
+
+  function blink(next) {
+    $colon.animate({
+      opacity: 1
+    }, 10, 'linear');
+    $colon.animate({
+      opacity: 1
+    }, 400, 'linear');
+    $colon.animate({
+      opacity: 0
+    }, 10, 'linear');
+    $colon.animate({
+      opacity: 0
+    }, 200, 'linear');
+    $colon.animate({
+      opacity: 1
+    }, 10, 'linear', next);
+  }
+
+  function spin(next) {
+    $text.animate({
+      rotation: 450
+    }, {
+      duration: 3000,
+      step: function (now, tween) {
+        if (tween.prop === 'rotation') {
+          $(this).css('transform', 'rotate(' + now + 'deg)');
+          $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
+        }
+      },
+      done: next
+    });
+  }
+
+  function xColor(next) {
+    function toHex(d) { return Math.floor(d).toString(16); }
+    function makeAffine(m, a) { return function (x) { return m*x + a; }; }
+    var red = makeAffine(-75, 255);
+    var green = makeAffine(-255, 255);
+    var blue = makeAffine(-175, 255);
+    $x.animate({
+      perc: 1
+    }, {
+      duration: 2000,
+      step: function (now, tween) {
+        if (tween.prop === 'perc') {
+          $(this).css('color', '#' + toHex(red(now)) + toHex(green(now)) + toHex(blue(now)))
+        }
+      },
+      done: next
+    });
+  }
+
+  sequence([slideUp, blink, spin, xColor, blink, slideDown, blink, blink])();
+});
+</script>
+
+<div id="card">
+  <div id="text"><div id="colon">:</div><div id="x">X</div></div>
+</div>
+</body>
+</html>
