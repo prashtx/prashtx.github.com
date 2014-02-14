@@ -8,13 +8,15 @@ body {
   font-size: 500px;
   font-family: Helvetica;
   color: white;
+  background-color: #ffddf7;
 }
 #card {
   width: 600px;
   height: 600px;
   margin: 50px auto;
-  background-color: black;
+  background-color: rgb(24,20,40);
   overflow: hidden;
+  position: relative;
 }
 #text {
   top: 350px;
@@ -28,6 +30,11 @@ body {
 }
 #x {
   display: inline-block;
+}
+.confetti {
+  position: absolute;
+  color: rgb(180, 0, 80);
+  font-size: 20px;
 }
 </style>
 </head>
@@ -120,7 +127,27 @@ $(function () {
     });
   }
 
-  sequence([slideUp, blink, spin, xColor, blink, slideDown, blink, blink])();
+  function confetti(next) {
+    var i;
+    var delay = 0;
+    function makeConfetti() {
+      var x = $('<div class="confetti">x</div>');
+      x.css('left', 700*Math.random());
+      x.css('top', 700*Math.random());
+      var rot = 'rotate(' + 360*Math.random() + 'deg)';
+      x.css('transform', rot);
+      x.css('-webkit-transform', rot);
+      return x;
+    }
+    for (i = 0; i < 300; i += 1) {
+      var $card = $('#card');
+      setTimeout(function () { $card.append(makeConfetti); }, delay);
+      delay += 20;
+    }
+    next();
+  }
+
+  sequence([slideUp, blink, spin, xColor, blink, slideDown, blink, blink, confetti])();
 });
 </script>
 
