@@ -1,0 +1,55 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<title>Map tile coordinates</title>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/pure/0.5.0/pure-min.css">
+	<script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/lodash/3.0.0/lodash.compat.min.js"></script>
+	<script src="js/app.js"></script>
+</head>
+<body>
+	<div class="pure-g">
+		<div class="pure-u-1-5"></div>
+		<div class="pure-u-3-5">
+			<h1>Map tile names and coordinates</h1>
+		</div>
+		<div class="pure-u-1-5"></div>
+	</div>
+
+	<div class="pure-g">
+		<div class="pure-u-1-5"></div>
+		<div class="pure-u-3-5">
+			<form class="pure-form pure-form-aligned" action="#">
+				<div class="pure-control-group">
+					<label for="tile">Tile (z/x/y)</label>
+					<input class="pure-input-2-3" id="tile" type="text" placeholder="13/1309/3166">
+				</div>
+				<div class="pure-control-group">
+					<label></label>
+					<button id="submit" type="submit" class="pure-button pure-button-primary">Submit</button>
+				</div>
+			</form>
+			<div id="results" hidden>
+				<div>
+					<a id="geojsonio"></a>
+				</div>
+				<h2>Bounds</h2>
+				<div id="bounds">
+					xmin: <span id="xmin"></span>
+					<br>
+					xmax: <span id="xmax"></span>
+					<br>
+					ymin: <span id="ymin"></span>
+					<br>
+					ymax: <span id="ymax"></span>
+				</div>
+				<pre id="bbox"></pre>
+				<h2>Polygon</h2>
+				<pre id="poly"></pre>
+			</div>
+		</div>
+		<div class="pure-u-1-5"></div>
+	</div>
+
+</body>
+</html>
