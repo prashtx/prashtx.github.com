@@ -1,0 +1,60 @@
+body {
+  font: 12px sans-serif;
+  max-width: 800px;
+  margin: auto;
+}
+
+.graph {
+  width: 700px;
+  height: 700px;
+}
+
+.plot-area {
+  fill: #dbdbdb;
+}
+
+.grid .tick {
+  stroke: #fff;
+  opacity: 1;
+}
+.grid path {
+  stroke-width: 0;
+}
+
+.bar {
+  opacity: .75;
+}
+
+.axis text {
+  font-size: 14px;
+}
+
+.title text {
+  font-size: 16px;
+}
+
+.legend text {
+  font-size: 14px;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.y.axis path {
+  display: none;
+}
+
+.y.axis line {
+  stroke: #fff;
+  stroke: #000;
+  stroke-opacity: .2;
+  shape-rendering: crispEdges;
+}
+
+.y.axis .zero line {
+  stroke: #000;
+  stroke-opacity: 1;
+}
